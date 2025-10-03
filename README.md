@@ -157,6 +157,30 @@ Hasil capture filter menampilkan paket yang berasal dan menuju ke IP address Man
 <img width="1212" height="688" alt="Screenshot 2025-10-03 083126" src="https://github.com/user-attachments/assets/362a4f70-5151-4ad4-a452-5cda151913f0" />
 
 ## Soal 7 
+Untuk membuat FTP Server di Eru kita perlu menginstall ``vsftpd``.
+
+<img width="1059" height="368" alt="Screenshot 2025-10-02 162830" src="https://github.com/user-attachments/assets/a12ba52c-2ae0-4c5c-9929-72cb72ab8a69" />
+
+Selanjutnya, buat direktori ``ftpshare`` dan konfigurasi dasar:
+
+<img width="609" height="167" alt="Screenshot 2025-10-02 163130" src="https://github.com/user-attachments/assets/5a058e32-3316-4060-827f-734d38f96e73" />
+
+``echo "local_enable=YES" >> /etc/vsftpd.conf `` Mengizinkan user Linux lokal (ainur, melkor) untuk login melalui FTP. ``echo "write_enable=YES" >> /etc/vsftpd.conf `` Mengizinkan operasi write di server secara umum. ``echo "chroot_local_user=YES" >> /etc/vsftpd.conf`` Setiap user lokal akan "terkunci" di direktori home mereka ``/home/ftpshare`` dan tidak dapat mengakses filesystem lainnya. ``echo "local_root=/home/ftpshare" >> /etc/vsftpd.conf`` Mengatur ``/home/ftpshare`` sebagai root direktori yang akan dilihat oleh semua user lokal setelah login. ``echo "anonymous_enable=NO" >> /etc/vsftpd.conf`` MEnonaktifkan Anonim dan memastikan bahwa hanya user terdaftar yang dapat login.
+
+Buat user baru dengan ``useradd`` dan atur password masing-masing menggunakan ``passwd``.
+
+<img width="383" height="96" alt="Screenshot 2025-10-02 163205" src="https://github.com/user-attachments/assets/d5d04a65-fa7d-4d6b-920c-61a01d5b08b8" />
+<img width="422" height="95" alt="Screenshot 2025-10-02 163243" src="https://github.com/user-attachments/assets/c423c997-c380-46a8-8b55-6502063851a6" />
+
+Atur hak akses masing-maisng user.
+
+<img width="427" height="41" alt="Screenshot 2025-10-02 163347" src="https://github.com/user-attachments/assets/4e5efa2d-26c1-4b99-98ad-89fb71e198d5" />
+
+``usermod -d /home/ftpshare ainur`` Perintah ini menetapkan ``/home/ftpshare`` sebagai home directory baru untuk user ainur. ``chmod 760 /home/ftpshare`` untuk membedakan hak akses: Ainur mendapatkan izin Write (w). Melkor mendapatkan izin No Access (0). 
+
+Selanjutnya jalankan FTP Server:
+
+<img width="322" height="40" alt="Screenshot 2025-10-02 163423" src="https://github.com/user-attachments/assets/07b6719e-ab0c-458d-bc8c-277263b8ba50" />
 
 ## Soal 8
 
@@ -174,6 +198,20 @@ Lihat hasil statistik ``ping``.
 Hasil statistik menunjukkan bahwa node Melkor berhasil mengirim dan menerima semua paket ICMP yang ditujukan ke node Eru dengan kinerja yang sangat baik. ``0% packet loss`` Semua paket berhasil mencapai Eru dan kembali ke Melkor. Ini membuktikan koneksi jaringan antara kedua node ini sangat stabil. Waktu respons rata-rata (avg) hanya ``0.314 milidetik``, yang merupakan respons hampir instan. hal ini menunjukkan komunikasi antara Melkor dan Eru berjalan stabil dan cepat.
 
 ## Soal 11
+Install server telnet di melkor dan tambahkan user. 
+
+<img width="944" height="352" alt="Screenshot 2025-10-03 095006" src="https://github.com/user-attachments/assets/4a0d7538-5204-43d8-a514-cccf7d8d3074" />
+<img width="379" height="135" alt="Screenshot 2025-10-03 095026" src="https://github.com/user-attachments/assets/c9b9cb0d-b4af-4231-8f1b-e06d3b4709ce" />
+
+Jalankan server :
+
+<img width="332" height="43" alt="image" src="https://github.com/user-attachments/assets/b09db275-bd0b-401e-ba4f-c825aff2bb24" />
+
+Install perintah telnet di Eru dan jalankan telnet ke IP Melkor.
+
+<img width="650" height="341" alt="image" src="https://github.com/user-attachments/assets/89debf72-241d-4f87-bb49-a6af86fc0807" />
+
+<img width="563" height="65" alt="image" src="https://github.com/user-attachments/assets/7bc553b5-fb15-4d0a-a711-6b07ae6d4357" />
 
 ## Soal 12
 Untuk menggunakan ``nc`` kita perlu menginstall dulu dengan ``apt update && apt-get install netcat-openbsd -y``.
