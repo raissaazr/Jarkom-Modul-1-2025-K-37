@@ -206,7 +206,9 @@ Selanjutnya, jalankan ``nc`` pada port 80 melkor pada Eru.
 Ini membuktikan bahwa ada layanan yang sedang berjalan di Melkor dan mendengarkan (listening) pada Port 80.<br/>
 
 Jalankan ``nc`` pada port 666 :
+
 <img width="637" height="43" alt="Screenshot 2025-10-02 162420" src="https://github.com/user-attachments/assets/d528f4fc-a408-4038-8198-45833a6153b8" />
+
 Berdasarkan hasil ini, Port 666 di Melkor adalah tertutup (closed). Hal ini menunjukkan bahwa Melkor tidak menjalankan layanan tersembunyi pada Port 666.
 
 ## Soal 13
