@@ -8,6 +8,7 @@
 Buka host server 10.15.43.32 GNS3 yang disediakan. Kemudian buat 8 node baru dengan ketentuan 1 node untuk router (Eru), 1 node untuk internet, 2 node untuk switch, dan 4 node sisanya untuk klien (Melkor, Manwe, Varda, Ulmo). 
 
 <img width="718" height="556" alt="Screenshot 2025-09-29 160716" src="https://github.com/user-attachments/assets/11205116-e2d2-4dc2-9432-821879c38982" />
+
 Untuk mengecek apakah node sudah bisa diakses dapat dilakukan dengan klik ``start`` pada node router. Kemudian buka terminal linux dan ketik 
 ```telnet 10.15.43.32 5311```, dengan ``5311`` menunjukkan port yang digunakan, dapat diketahui di GNS, jika terhubung akan muncul output seperti berikut:
 
