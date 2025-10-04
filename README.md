@@ -255,7 +255,7 @@ Berdasarkan hasil ini, Port 666 di Melkor adalah tertutup (closed). Hal ini menu
 1. How many packets are recorded in the pcapng file?
 Format: int
 <img width="1920" height="1080" alt="Image" src="https://github.com/user-attachments/assets/318d138e-c6b8-4f90-a01d-2bd9627a6200" />
-Pada soal ditanya jumlah paket yang terekam, dan jumlah paket tersebut dapat dilihat di bagian bawah dari file pcapng yang sudah dibuka. \n
+Pada soal ditanya jumlah paket yang terekam, dan jumlah paket tersebut dapat dilihat di bagian bawah dari file pcapng yang sudah dibuka.  
 2. What are the user that successfully logged in?
 Format: user:pass
 <img width="1920" height="1080" alt="Image" src="https://github.com/user-attachments/assets/6f79189c-f6cb-426b-b96d-276fadde3212" />
