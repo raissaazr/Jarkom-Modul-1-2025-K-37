@@ -269,3 +269,15 @@ Berdasarkan hasil ini, Port 666 di Melkor adalah tertutup (closed). Hal ini menu
 
 ## Soal 20
 <img width="1089" height="419" alt="Image" src="https://github.com/user-attachments/assets/f8b557df-fc49-4355-bd0d-e1ade508b8db" />
+
+# Revisi 
+## Soal 7
+Setelah instal ``vsftpd`` di Eru dan membuat direktori baru ``/home/vsftpd``, masuk ke direktori tersebut. Setelahnya buat user, atur hak akses user, dan jalankan server ftp di user.
+
+<img width="757" height="342" alt="Screenshot 2025-10-04 065458" src="https://github.com/user-attachments/assets/875efd28-ad7c-4d7e-a636-de0df5ad0d49" />
+
+<img width="571" height="69" alt="Screenshot 2025-10-04 075357" src="https://github.com/user-attachments/assets/427a5e13-e58c-4020-8c61-fb7dccd18bc8" />
+
+Di terminal manwe, coba akses ftp server dan masukkan usn dan password. 
+
+<img width="496" height="192" alt="Screenshot 2025-10-04 075416" src="https://github.com/user-attachments/assets/95907dc5-81ab-46e6-a113-908342194827" />
