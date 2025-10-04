@@ -252,22 +252,125 @@ Berdasarkan hasil ini, Port 666 di Melkor adalah tertutup (closed). Hal ini menu
 ## Soal 13
 
 ## Soal 14
+1. How many packets are recorded in the pcapng file?
+Format: int
+<img width="1920" height="1080" alt="Image" src="https://github.com/user-attachments/assets/318d138e-c6b8-4f90-a01d-2bd9627a6200" />
+Pada soal ditanya jumlah paket yang terekam, dan jumlah paket tersebut dapat dilihat di bagian bawah dari file pcapng yang sudah dibuka.
+2. What are the user that successfully logged in?
+Format: user:pass
+<img width="1920" height="1080" alt="Image" src="https://github.com/user-attachments/assets/6f79189c-f6cb-426b-b96d-276fadde3212" />
+Dapat dilihat pada salah satu contoh file yang berisi line based text, terdapat kalimat “Invalid credentials”, jadi disini dapat disimpulkan jika percobaan untuk log in gagal, jadi selanjutnya kita lakukan filter untuk mengecualikan kata gagal yaitu “Invalid” dengan filter:
+```
+http.content_type contains “text/html” && !(http contains “Invalid”)
+```
+<img width="1920" height="1080" alt="Image" src="https://github.com/user-attachments/assets/753cb12d-dcd4-4961-9cd5-e41d02072139" />
+Filter tersebut digunakan untuk mengambil bagian dengan tipe konten text/html dan mengecualikan kata Invalid sehingga didapatkan 1 packet di atas dan lakukan
+Follow -> TCP stream dan akan menemukan:
+<img width="1920" height="1080" alt="Image" src="https://github.com/user-attachments/assets/628ae7e0-5f8b-419c-bc78-b30b623d3c29" />
+Dapat dilihat kita mendapatkan username dan password nya untuk menjawab soal.
+<img width="616" height="310" alt="Image" src="https://github.com/user-attachments/assets/43655f8b-0730-4061-a59a-b7185720e68a" />
+3. In which stream were the credentials found?
+Format: int
+Dari Follow yang kita lakukan untuk mendapatkan username dan password sebelumnya, kita dapat menemukan TCP stream dari paket tersebut di bagian kanan bawah, yaitu 41824
+<img width="620" height="407" alt="Image" src="https://github.com/user-attachments/assets/fd57e341-cc6b-4c7e-9c2b-a24f7f2882f7" />
+4. What tools are used for brute force?
+Format: Hydra v1.8.0-dev
+Sama dengan soal sebelumnya, untuk mendapatkan tools yang digunakan dapat dilihat dari hasil aksi Follow yang dilakukan pada bagian User Agent.
 <img width="1028" height="525" alt="Image" src="https://github.com/user-attachments/assets/7a70f184-5777-48ef-8a20-03e7e4da8177" />
 
 ## Soal 15
+-
 
 ## Soal 16
+-
 
 ## Soal 17
+1. What is the name of the first suspicious file?
+Format: file.exe
+Pertama kita cari terlebih dahulu paket yang mengandung .exe dengan filter:
+http contains “.exe”
+<img width="1920" height="1080" alt="Image" src="https://github.com/user-attachments/assets/4d8bb1f2-b4a5-4965-88c0-0ba2265cfb7e" />
+Dengan filter tersebut kita akan menemukan paket yang mengandung file .exe, selanjutnya kita coba untuk masukkan nama file .exe yang terlihat di bagian info.
+<img width="578" height="232" alt="Image" src="https://github.com/user-attachments/assets/5d19c575-71bb-48fc-a0a0-e3c8842f8a7c" />
+Karena nama file yang dimasukkan salah, kita coba pakai cara lain dengan pergi ke bagian File -> Export Objects -> HTTP dan kita akan menemukan:
+<img width="1920" height="1080" alt="Image" src="https://github.com/user-attachments/assets/ca2094d0-90e2-48f9-9cf6-c1acfd261dd1" />
+Dimana akan mendapatkan 3 packet, namun saat sebelumnya kita mencoba untuk langsung memasukkan knr.exe dan terjadi kesalahan, selanjutnya kita coba masukkan file dengan format .doc di atas.
+<img width="578" height="303" alt="Image" src="https://github.com/user-attachments/assets/5c8a53a0-39be-41ca-b235-beacaeeeb47f" />
+Karena percobaan berhasil, maka file di atas merupakan file mencurigakan yang pertama.
+2. What is the name of the second suspicious file?
+Format: file.exe
+Selanjutnya kita diminta mencari tahu nama file mencurigakan ke dua, jadi kita coba masukkan knr.exe yang sudah kita temukan sebelumnya.
+<img width="594" height="395" alt="Image" src="https://github.com/user-attachments/assets/25c70186-828c-41d4-bd9e-4266ecf81b02" />
+3. What is the hash of the second suspicious file (knr.exe)?
+Format: sha256
+Karena diminta hash file dengan format sha256, pertama kita lanjutkan dari halaman setelah Export Objects HTTP dimana kita select file knr.exe terlebih dahulu lalu kita save (disini saya menggunakan WSL Ubuntu) ke path home lalu user dan simpan file knr.exe, lalu buka Ubuntu dan jalankan sha256sum knr.exe untuk menghitung checksum (hash) sha256 dari file knr.exe
+<img width="885" height="56" alt="Image" src="https://github.com/user-attachments/assets/ffccc29b-52b0-40f7-81bf-3c2da34f159d" />
+Setelah mendapatkan hasilnya, kita bisa masukkan untuk menjawab soal.
 <img width="1061" height="415" alt="Image" src="https://github.com/user-attachments/assets/8c791174-8f59-4b68-9bfd-4b933775fc95" />
 
 ## Soal 18
+1. How many files are suspected of containing malware?
+Format: int
+Pertama kita dapat pergi ke bagian File -> Export Objects -> SMB, maka akan menampilkan 7 packet seperti di bawah:
+<img width="1920" height="1080" alt="Image" src="https://github.com/user-attachments/assets/6cda03cc-d121-4f13-8f0a-dfe8dce04d3d" />
+Jika dilihat, akan ada beberapa file dan yang kemungkinan mengandung malware adalah file exe, jadi kita coba masukkan jumlah file: 2.
+<img width="641" height="214" alt="Image" src="https://github.com/user-attachments/assets/c4f1fe25-a7f2-4821-bb20-c0bdb64be8e2" />
+Karena sudah benar, saatnya lanjut ke nomor berikutnya.
+2. What is the name of the first malicious file?
+Format: file.exe
+Pada halaman Export Objects SMB sebelumnya dapat dilihat informasi nama file yang pertama (atas), kita coba masukkan yang dimulai dari d0p.
+<img width="875" height="306" alt="Image" src="https://github.com/user-attachments/assets/2b31cfd3-3cf4-4154-aff8-8f821ac4b6d1" />
+Karena sudah berhasil, kita dapat melanjutkan ke soal berikutnya.
+3. Apa nama file berbahaya yang kedua?
+Format: file.exe
+Karena sebelumnya sudah menggunakan nama file yang atas dan berhasil, sekarang kita masukkan nama file kedua yang dimulai dari oiku.
+<img width="906" height="405" alt="Image" src="https://github.com/user-attachments/assets/a89a9d86-bb7a-4249-b701-cb02aa2e7aa3" />
+Dan percobaan berhasil lalu lanjutkan ke soal selanjutnya.
+4. What is the hash of the first malicious file?
+Format: sha256
+Sama seperti soal 17 yang sudah kita kerjakan, gunakan perintah sha256sum <filename> dan masukkan hasilnya untuk menjawab pertanyaan.
+<img width="865" height="488" alt="Image" src="https://github.com/user-attachments/assets/9b6b1773-41fd-421a-9d30-732f72629bfa" />
+5. What is the hash of the second malicious file?
+Format: sha256
+Kita lakukan cara yang sama untuk menjawab pertanyaan sebelumnya pada file kedua.
 <img width="1069" height="615" alt="Image" src="https://github.com/user-attachments/assets/6043649a-8c72-4bb5-9855-1b9b73478356" />
 
 ## Soal 19
+1. Who sent the threatening message
+Format: string (name)
+Pertama temukan packet dengan warna merah yang mencurigakan, lalu lakukan Follow ke TCP stream nya, dan akan mendapatkan hasil seperti di bawah:
+<img width="1268" height="1080" alt="Image" src="https://github.com/user-attachments/assets/5ae79fdd-c1fb-4863-92fc-d84ab67f9430" />
+Setelah masuk ke Follow TCP stream seperti di atas, selanjutnya cari bagian From yang mengindikasikan bahwa itu adalah sang pengirim dan coba masukkan tanpa email karena format nya adalah string yang berupa (name):
+<img width="570" height="209" alt="Image" src="https://github.com/user-attachments/assets/d5e6bbd4-16dd-410a-9dce-324d18341792" />
+2. How much ransom did the attacker demand ($)?
+Format: int
+Lanjut pada bagian halaman Follow TCP stream di atas, kita cari bagian dimana attacker memberi pesan meminta tebusan dan masukkan ke soal.
+<img width="570" height="305" alt="Image" src="https://github.com/user-attachments/assets/289fc34d-6850-49b8-968e-124f074aac68" />
+Ketika sudah menemukan jumlah yang diminta benar, kita bisa lanjut ke soal berikutnya.
+3. What is the attacker’s bitcoin wallet?
+Format: string
+Untuk bagian ini kita dapat lanjut untuk mencari di halaman TCP stream sebelumnya berupa kata “My bitcoin wallet is:” dan masukkan nilai nya ke dalam soal.
 <img width="1094" height="424" alt="Image" src="https://github.com/user-attachments/assets/16825be5-c6b4-4d49-b475-52777aa309a1" />
+Setelah berhasil menemukan nilai nya, soal ini berhasil diselesaikan sepenuhnya.
 
 ## Soal 20
+1. What encryption method is used?
+Format: string
+Lihat kolom Protocol di packet list: TCP, HTTP, BROWSER, ARP, TLSv1.2, STP, DNS, NBNS. Saat kita coba untuk follow masing-masing Protocol yang ada, hanya 2 Protocol yang menampilkan sesuatu seperti:
+<img width="1920" height="1080" alt="Image" src="https://github.com/user-attachments/assets/b4d7756c-40e4-4506-bcfe-77cb213db3a5" />
+Jika kita lihat dari hasil follow di atas, ada 2 Protocol yang digunakan yaitu TLS dan HTTP. Kita coba masukkan untuk TLS ke dalam soal:
+<img width="575" height="210" alt="Image" src="https://github.com/user-attachments/assets/26917fdc-152b-4aab-9cf4-90d6f2d5f4c3" />
+Saat kita memasukkan jawaban TLS, jawaban tersebut dinyatakan benar, jadi kita bisa lanjut ke soal berikutnya.
+2. What is the name of the malicious file placed by the attacker?
+Format: file.exe
+Untuk mencari nama file, kita bisa ikuti cara yang pernah kita lakukan, yaitu ke bagian
+File -> Export Objects -> HTTP, namun saat kita cek hasilnya akan kosong, jadi kita gunakan file .txt yang diberi berupa keylog untuk membantu Wireshark mendecrypt TLS dalam file pcap. Pertama masuk ke bagian Edit -> Preferences -> Protocols -> TLS -> (Pre)-Master-Secret log filename lalu masukkan file keylog tadi dan apply. Selanjutnya kita masuk kembali ke Export Objects HTTP dan akan menampilkan beberapa packet yang sebelumnya tidak ada:
+<img width="1920" height="1080" alt="Image" src="https://github.com/user-attachments/assets/0d0f594d-a441-4657-97f4-02416ca20e10" />
+Dari packet di atas, yang memungkinkan sebagai file .exe adalah yang bernama invest_20.dll, jadi kita coba masukkan ke dalam soal:
+<img width="778" height="307" alt="Image" src="https://github.com/user-attachments/assets/9cbcbc84-823e-43af-b153-2d575639e0a9" />
+3. What is the hash of the file containing the malware?
+Format: sha256
+Kita lakukan sha256sum untuk file invest_20.dll seperti soal-soal sebelumnya.
 <img width="1089" height="419" alt="Image" src="https://github.com/user-attachments/assets/f8b557df-fc49-4355-bd0d-e1ade508b8db" />
 
 # Revisi 
