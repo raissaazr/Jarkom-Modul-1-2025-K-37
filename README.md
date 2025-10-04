@@ -255,7 +255,8 @@ Berdasarkan hasil ini, Port 666 di Melkor adalah tertutup (closed). Hal ini menu
 1. How many packets are recorded in the pcapng file?
 Format: int
 <img width="1920" height="1080" alt="Image" src="https://github.com/user-attachments/assets/318d138e-c6b8-4f90-a01d-2bd9627a6200" />
-Pada soal ditanya jumlah paket yang terekam, dan jumlah paket tersebut dapat dilihat di bagian bawah dari file pcapng yang sudah dibuka.  
+Pada soal ditanya jumlah paket yang terekam, dan jumlah paket tersebut dapat dilihat di bagian bawah dari file pcapng yang sudah dibuka.
+
 2. What are the user that successfully logged in?
 Format: user:pass
 <img width="1920" height="1080" alt="Image" src="https://github.com/user-attachments/assets/6f79189c-f6cb-426b-b96d-276fadde3212" />
@@ -269,10 +270,12 @@ Follow -> TCP stream dan akan menemukan:
 <img width="1920" height="1080" alt="Image" src="https://github.com/user-attachments/assets/628ae7e0-5f8b-419c-bc78-b30b623d3c29" />
 Dapat dilihat kita mendapatkan username dan password nya untuk menjawab soal.
 <img width="616" height="310" alt="Image" src="https://github.com/user-attachments/assets/43655f8b-0730-4061-a59a-b7185720e68a" />
+
 3. In which stream were the credentials found?
 Format: int
 Dari Follow yang kita lakukan untuk mendapatkan username dan password sebelumnya, kita dapat menemukan TCP stream dari paket tersebut di bagian kanan bawah, yaitu 41824
 <img width="620" height="407" alt="Image" src="https://github.com/user-attachments/assets/fd57e341-cc6b-4c7e-9c2b-a24f7f2882f7" />
+
 4. What tools are used for brute force?
 Format: Hydra v1.8.0-dev
 Sama dengan soal sebelumnya, untuk mendapatkan tools yang digunakan dapat dilihat dari hasil aksi Follow yang dilakukan pada bagian User Agent.
